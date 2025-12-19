@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+Put your HTML text here<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATTAWASOL INSANIY | Toko Grosir & Distributor Kurma di Jogja</title>
+    <title>ATTAWASOL INSANIY | Toko Grosir & Distributor Kurma di Singapura</title>
     <style>
         * {
             margin: 0;
@@ -46,7 +46,6 @@
             gap: 10px;
         }
 
-        /* Style Khusus untuk Logo Gambar */
         .logo-img {
             height: 50px;
             width: 50px;
@@ -98,40 +97,133 @@
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* --- HERO SECTION: FIXED ALIGNMENT --- */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f4e5d3" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%23d2691e" opacity="0.1"/><circle cx="900" cy="400" r="120" fill="%238b4513" opacity="0.1"/></svg>');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
             position: relative;
+            height: 90vh;
             overflow: hidden;
+            background: linear-gradient(135deg, #3e1e08 0%, #8B4513 100%); 
         }
 
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease-in-out;
+            z-index: 1;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        /* Bagian Teks (Kiri) */
         .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-            animation: fadeInUp 1s ease;
+            flex: 1;
+            max-width: 600px;
+            color: white;
+            z-index: 10;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .hero-slide.active .hero-content {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            color: #f0f0f0;
+            line-height: 1.6;
+            max-width: 90%;
         }
 
+        /* Bagian Gambar (Kanan) - SUDAH DI-FIX AGAR SEJAJAR */
+        .hero-image-container {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Memastikan gambar selalu di tengah container */
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .hero-slide.active .hero-image-container {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .hero-image-container img {
+            /* KUNCI UKURAN: Ini rahasia agar gambar sejajar */
+            height: 450px; 
+            width: 450px; 
+            
+            object-fit: contain; /* Gambar utuh, tidak terpotong */
+            object-position: center center; /* Posisi pasti di tengah */
+            
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)); /* Bayangan */
+            border-radius: 20px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .dot.active {
+            background: #FFD700;
+            border-color: #FFD700;
+            transform: scale(1.3);
+        }
+
+        /* Button Styles */
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -163,7 +255,7 @@
             color: #D2691E;
         }
 
-        /* Featured Products Section */
+        /* General Section Styles */
         .section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -190,10 +282,10 @@
             background: linear-gradient(90deg, transparent, #D2691E, transparent);
         }
 
-        /* Product Categories / RUTHOB Grid */
+        /* Categories Grid */
         .categories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted width for 5 items */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
@@ -213,10 +305,9 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
-        /* Updated Category Image Style for Product Photos */
         .category-image {
             height: 250px;
-            background: white; /* Changed to white to match JPG background */
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -228,7 +319,7 @@
         .category-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensures the whole plate is visible */
+            object-fit: contain;
             transition: transform 0.5s ease;
             padding: 10px;
         }
@@ -411,35 +502,16 @@
 
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(-25%, -25%) scale(1.1);
-            }
-        }
-
-        /* Responsive */
+        /* Responsive Mobile */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -455,25 +527,32 @@
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
 
-            .nav-menu.active {
-                display: flex;
-            }
+            .nav-menu.active { display: flex; }
+            .mobile-toggle { display: block; }
 
-            .mobile-toggle {
-                display: block;
+            /* Hero Mobile Adjustments */
+            .hero { height: auto; min-height: 90vh; padding-top: 80px; }
+            .hero-slide { 
+                flex-direction: column-reverse;
+                justify-content: center;
+                text-align: center;
+                padding: 2rem;
             }
-
-            .hero h1 {
-                font-size: 2rem;
+            .hero-content { 
+                text-align: center; 
+                margin-top: 1rem;
+                transform: translateY(20px);
             }
-
-            .hero p {
-                font-size: 1rem;
+            .hero h1 { font-size: 2.2rem; }
+            .hero-image-container { 
+                transform: translateY(-20px); 
+                height: auto;
             }
-
-            .section-title {
-                font-size: 1.8rem;
+            .hero-image-container img { 
+                height: 280px; /* Ukuran lebih kecil untuk HP */
+                width: 280px;
             }
+            .hero p { margin: 0 auto 1.5rem auto; }
 
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -502,13 +581,87 @@
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Selamat Datang di PASAR KURMA</h1>
-            <p>Toko Grosir & Distributor Kurma Terpercaya di Indonesia. Melayani pemesanan ke seluruh kota sejak 2014</p>
-            <div>
-                <a href="#produk" class="btn">Beli Sekarang</a>
-                <a href="#promo" class="btn btn-secondary">Produk Diskon</a>
+        <div class="hero-slide active">
+            <div class="hero-content">
+                <h2>Ahlan Wa Sahlan</h2>
+                <h1>ATTAWASOL INSANIY SINGAPURA</h1>
+                <p>Distributor Ruthob Premium dengan standar Cold Chain terbaik. Menghadirkan kurma segar dari kebun langsung ke meja makan Anda.</p>
+                <div>
+                    <a href="#produk" class="btn">Belanja Sekarang</a>
+                </div>
             </div>
+            <div class="hero-image-container">
+                <img src="attawasol logo_page-0001.jpg" alt="Attawasol Insaniy">
+            </div>
+        </div>
+
+        <div class="hero-slide">
+            <div class="hero-content">
+                <h2>Best Seller</h2>
+                <h1>Ruthob Sukari</h1>
+                <p>Si Manis yang Creamy. Tekstur dagingnya sangat lembut, lumer di mulut dengan rasa manis alami yang memanjakan lidah.</p>
+                <div><a href="#produk" class="btn">Pesan Sekarang</a></div>
+            </div>
+            <div class="hero-image-container">
+                <img src="Sukariy.jpg" alt="Ruthob Sukari">
+            </div>
+        </div>
+
+        <div class="hero-slide">
+            <div class="hero-content">
+                <h2>Varian Eksklusif</h2>
+                <h1>Nabta Sultan</h1>
+                <p>Warna kemerahan yang menggoda dengan daging tebal. Pilihan tepat bagi pecinta kurma dengan tekstur legit.</p>
+                <div><a href="#produk" class="btn">Pesan Sekarang</a></div>
+            </div>
+            <div class="hero-image-container">
+                <img src="Nabta Sultan.jpg" alt="Nabta Sultan">
+            </div>
+        </div>
+
+        <div class="hero-slide">
+            <div class="hero-content">
+                <h2>Kurma Nabi</h2>
+                <h1>Ajwa Premium</h1>
+                <p>Hitam pekat penuh berkah. Ruthob Ajwa memiliki kandungan serat tinggi dan khasiat kesehatan yang luar biasa.</p>
+                <div><a href="#produk" class="btn">Pesan Sekarang</a></div>
+            </div>
+            <div class="hero-image-container">
+                <img src="Ajwa Premium.jpg" alt="Ajwa Premium">
+            </div>
+        </div>
+
+        <div class="hero-slide">
+            <div class="hero-content">
+                <h2>Sensasi Keriuk</h2>
+                <h1>Ruthob Barhi</h1>
+                <p>Unik! Satu-satunya kurma yang enak dimakan saat fase Khalal (mengkal). Renyah seperti apel, manis seperti tebu.</p>
+                <div><a href="#produk" class="btn">Pesan Sekarang</a></div>
+            </div>
+            <div class="hero-image-container">
+                <img src="Barhiy.jpg" alt="Ruthob Barhi">
+            </div>
+        </div>
+
+        <div class="hero-slide">
+            <div class="hero-content">
+                <h2>King of Dates</h2>
+                <h1>Ruthob Medjool</h1>
+                <p>Ukuran JUMBO. Puas dalam sekali gigitan. Daging tebal, lembut, dan aroma karamel yang khas.</p>
+                <div><a href="#produk" class="btn">Pesan Sekarang</a></div>
+            </div>
+            <div class="hero-image-container">
+                <img src="Madjool.png" alt="Medjool">
+            </div>
+        </div>
+
+        <div class="slider-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
         </div>
     </section>
 
@@ -557,7 +710,7 @@
 
             <div class="category-card">
                 <div class="category-image">
-                    <img src="Madjool.jpg" alt="Ruthob Medjool">
+                    <img src="Madjool.png" alt="Ruthob Medjool">
                 </div>
                 <div class="category-content">
                     <h3>Ruthob Medjool</h3>
@@ -781,6 +934,44 @@
             const nav = document.getElementById('navMenu');
             nav.classList.toggle('active');
         }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            if (slides.length === 0) return;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % totalSlides;
+            showSlide(nextIndex);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000); 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(document.querySelectorAll('.hero-slide').length > 0) {
+                resetTimer();
+            }
+        });
     </script>
 </body>
 </html>
